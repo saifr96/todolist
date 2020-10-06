@@ -8,14 +8,5 @@ import com.qa.todolist.persistence.domain.TaskList;
 @Repository
 public interface TaskListRepository extends JpaRepository<TaskList, Long> {
 
-    // J - Java
-    // P - Persistence
-    // A - Application Programming Interface
-
-//    List<Guitarist> findByName(String name);
-//
-//    List<Guitarist> findByStrings(Integer strings);
-//
-//    List<Guitarist> findByType(String type);
 
 }

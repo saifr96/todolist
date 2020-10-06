@@ -1,5 +1,6 @@
 package com.qa.todolist.service;
 
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -7,10 +8,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import com.qa.todolist.dto.TaskDTO;
+import com.qa.todolist.dto.TaskListDTO;
 import com.qa.todolist.exception.TaskNotFoundException;
+import com.qa.todolist.exception.TaskListNotFoundException;
 import com.qa.todolist.persistence.domain.Task;
+import com.qa.todolist.persistence.domain.TaskList;
 import com.qa.todolist.persistence.repository.TaskRepository;
 import com.qa.todolist.utils.todolistBeanUtils;
 
@@ -32,15 +35,6 @@ public class TaskService {
         return this.mapper.map(task, TaskDTO.class);
     }
 
-//    private Task mapFromDTO(TaskDTO taskDTO) {
-//       return this.mapper.map(taskDTO, Task.class);
-//    }
-
-//    public BandDTO create(BandDTO bandDTO) {
-//        Band toSave = this.mapFromDTO(bandDTO);
-//        Band saved = this.repo.save(toSave);
-//        return this.mapToDTO(saved);
-//    }
 
     public TaskDTO create(Task task) {
         Task created = this.repo.save(task);
@@ -59,19 +53,12 @@ public class TaskService {
         return this.mapToDTO(found);
     }
 
- // Update
- //	public BandDTO update(Band band, Long id) {
- //		Band toUpdate = this.repo.findById(id).orElseThrow(BandNotFoundException::new);
- //		toUpdate.setName(band.getName());
- //		toUpdate.setGuitarists(band.getGuitarists());
- //		return this.mapToDTO(this.repo.save(toUpdate));
- //   }
     
-    public TaskDTO update(Task task, Long id) {
-		Task toUpdate = this.repo.findById(id).orElseThrow(TaskNotFoundException::new);
-		toUpdate.setName(task.getName());
-		toUpdate.setTasklist(task.getTasklist());
-		return this.mapToDTO(this.repo.save(toUpdate));
+    public TaskDTO update(TaskDTO taskDTO, Long id) {
+        Task toUpdate = this.repo.findById(id).orElseThrow(TaskNotFoundException::new);
+        todolistBeanUtils.mergeNotNull(taskDTO, toUpdate);
+        return this.mapToDTO(this.repo.save(toUpdate));
+    
     }
     
 
@@ -83,8 +70,4 @@ public class TaskService {
         return !this.repo.existsById(id);
     }
 
-
-
 	}
-
-

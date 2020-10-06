@@ -27,30 +27,15 @@ import com.qa.todolist.persistence.repository.TaskListRepository;
 @AutoConfigureMockMvc
 public class TaskListControllerIntegrationTest {
 
-    // autowiring objects for mocking different aspects of the application
-    // here, a mock repo (and relevant mappers) are autowired
-    // they'll 'just work', so we don't need to worry about them
-    // all we're testing is how our controller integrates with the rest of the API
-
-    // mockito's request-making backend
-    // you only need this in integration testing - no mocked service required!
-    // this acts as postman would, across your whole application
     @Autowired
     private MockMvc mock;
 
-    // i'm reusing my normal repo to ping different things to for testing purposes
-    // this is only used for my <expected> objects, not <actual> ones!
     @Autowired
     private TaskListRepository repo;
 
-    // this specifically maps POJOs for us, in our case to JSON
-    // slightly different from ObjectMapper because we built it ourselves (and use
-    // it exclusively on our <expected> objects
     @Autowired
     private ModelMapper modelMapper;
 
-    // this specifically maps objects to JSON format for us
-    // slightly different from ModelMapper because this is bundled with mockito
     @Autowired
     private ObjectMapper objectMapper;
 
@@ -60,9 +45,8 @@ public class TaskListControllerIntegrationTest {
 
     private Long id = 1L;
     private String testName;
-    private Long task_id;
+    private Long idTask = 1L;
   
-
     private TaskListDTO mapToDTO(TaskList tasklist) {
         return this.modelMapper.map(tasklist, TaskListDTO.class);
     }
@@ -70,14 +54,12 @@ public class TaskListControllerIntegrationTest {
     @BeforeEach
     void init() {
         this.repo.deleteAll();
-
-        this.testTaskList = new TaskList("wash the car");
+        this.testTaskList = new TaskList("wash the car", idTask);
         this.testTaskListWithId = this.repo.save(this.testTaskList);
-        this.tasklistDTO = this.mapToDTO(testTaskListWithId);
-        
+        this.tasklistDTO = this.mapToDTO(testTaskListWithId);  
         this.id = this.testTaskListWithId.getId();
         this.testName = this.testTaskListWithId.getName();
-       
+        this.idTask = this.testTaskListWithId.getIdTask();
     }
 
     @Test
@@ -88,6 +70,7 @@ public class TaskListControllerIntegrationTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
                 .andExpect(content().json(this.objectMapper.writeValueAsString(this.tasklistDTO)));
+        
     }
 
     @Test
@@ -102,26 +85,21 @@ public class TaskListControllerIntegrationTest {
     	List<TaskListDTO> tasklistList = new ArrayList<>();
     	        tasklistList.add(this.tasklistDTO);
     	        String expected = this.objectMapper.writeValueAsString(tasklistList);
-    	        // expected = { { "name": "Nick", ... } , { "name": "Cris", ... } }
-
     	        String actual = this.mock.perform(request(HttpMethod.GET, "/tasklist/read").accept(MediaType.APPLICATION_JSON))
     	                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
-
     	        assertEquals(expected, actual);
     }
 
     @Test
     void testUpdate() throws Exception {
-    	TaskListDTO newTaskList = new TaskListDTO(null, "take the car to the carwash",task_id);
-    	TaskList updatedTaskList = new TaskList(newTaskList.getName());
+    	TaskListDTO newTaskList = new TaskListDTO(null, "take the car to the carwash",idTask);
+    	TaskList updatedTaskList = new TaskList(newTaskList.getName(), idTask);
         updatedTaskList.setId(this.id);
         String expected = this.objectMapper.writeValueAsString(this.mapToDTO(updatedTaskList));
-
         String actual = this.mock.perform(request(HttpMethod.PUT, "/tasklist/update/" + this.id) 
                 .contentType(MediaType.APPLICATION_JSON).content(this.objectMapper.writeValueAsString(newTaskList))
                 .accept(MediaType.APPLICATION_JSON)).andExpect(status().isAccepted()) // 201
                 .andReturn().getResponse().getContentAsString();
-
         assertEquals(expected, actual);
     }
 
