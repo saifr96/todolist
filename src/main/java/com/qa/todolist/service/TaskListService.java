@@ -30,16 +30,6 @@ public class TaskListService {
         return this.mapper.map(tasklist, TaskListDTO.class);
     }
 
-    private TaskList mapFromDTO(TaskListDTO tasklistDTO) {
-        return this.mapper.map(tasklistDTO, TaskList.class);
-    }
-
-    // create
-//    public GuitaristDTO create(GuitaristDTO guitaristDTO) {
-//        Guitarist toSave = this.mapFromDTO(guitaristDTO);
-//        Guitarist saved = this.repo.save(toSave);
-//        return this.mapToDTO(saved);
-//    }
 
     public TaskListDTO create(TaskList tasklist) {
         TaskList created = this.repo.save(tasklist);
@@ -47,27 +37,24 @@ public class TaskListService {
         return mapped;
     }
 
-    // readAll
     public List<TaskListDTO> readAll() {
         List<TaskList> found = this.repo.findAll();
         List<TaskListDTO> streamed = found.stream().map(this::mapToDTO).collect(Collectors.toList());
         return streamed;
     }
 
-    // readById
     public TaskListDTO read(Long id) {
         TaskList found = this.repo.findById(id).orElseThrow(TaskListNotFoundException::new);
         return this.mapToDTO(found);
     }
 
-    // update
+
     public TaskListDTO update(TaskListDTO tasklistDTO, Long id) {
         TaskList toUpdate = this.repo.findById(id).orElseThrow(TaskListNotFoundException::new);
         todolistBeanUtils.mergeNotNull(tasklistDTO, toUpdate);
         return this.mapToDTO(this.repo.save(toUpdate));
     }
 
-    // delete
     public boolean delete(Long id) {
         if (!this.repo.existsById(id)) {
             throw new TaskListNotFoundException();

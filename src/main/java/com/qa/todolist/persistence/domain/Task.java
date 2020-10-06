@@ -4,41 +4,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
+//import lombok.ToString;
 
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
+//@ToString
 @EqualsAndHashCode
+
 public class Task {
 
-	@Id
-	@GeneratedValue
-	private long id;
 	
-	@Column(name = "task_name", unique = true)
-	private String name;
-	
-	//@OneToMany(targetEntity = Guitarist.class, cascade = CascadeType.ALL)
-	@OneToMany(mappedBy = "task")
-	private List<TaskList> tasklist = new ArrayList<>();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	public Task(String name) {
-		this.name = name;
-		this.tasklist = new ArrayList<>();
-	}
+    private String name;
+
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
+    private List<TaskList> tasklist = new ArrayList<>();
+
+    public Task(String name) {
+        this.name = name;
+    }
+
 }

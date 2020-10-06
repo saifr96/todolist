@@ -3,7 +3,7 @@ package com.qa.todolist.service;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -12,38 +12,33 @@ import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+//import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.MockBean;
-
 
 import com.qa.todolist.dto.TaskDTO;
 import com.qa.todolist.dto.TaskListDTO;
 import com.qa.todolist.persistence.domain.Task;
-import com.qa.todolist.persistence.domain.TaskList;
 import com.qa.todolist.persistence.repository.TaskRepository;
 
 @SpringBootTest
 public class TaskServiceIntegrationTest {
 
-	@MockBean
-	private ModelMapper modelMapper;
-	
-	@Autowired
-	private TaskService service;
-	
-	@Autowired
-	private TaskRepository repo;
-	
-	private Task tester;
-	private Task testerId;
-	private List<TaskList> tasklist;
-	private TaskDTO dto;
-	  private Task testTask;
+	 @Autowired
+	    private TaskService service;
+
+	    @Autowired
+	    private TaskRepository repo;
+
+	    private Task testTask;
 	    private Task testTaskWithId;
-	
+
+	  //  @Autowired
+	    @MockBean
+	    private ModelMapper modelMapper;
 	// Mapping function
 
-	private TaskDTO mapToDTO(Task task) {
-		return this.modelMapper.map(task, TaskDTO.class);
+		private TaskDTO mapToDTO(Task task) {
+			return this.modelMapper.map(task, TaskDTO.class);
 	}
 	
 	// Testing constants
@@ -53,45 +48,42 @@ public class TaskServiceIntegrationTest {
 	@BeforeEach
 	void init() {
 		this.repo.deleteAll(); // Clear
-		this.tester = new Task(this.exampleName);
-		this.testerId = this.repo.save(tester);
+		this.testTask = new Task(this.exampleName);
+		this.testTaskWithId = this.repo.save(testTask);
 	}
 	
 	@Test
 	void testCreate() {
 		// Test assertion
-		assertThat(this.mapToDTO(this.testerId))
-		.isEqualTo(this.service.create(tester));
+		assertThat(this.mapToDTO(this.testTaskWithId))
+		.isEqualTo(this.service.create(testTask));
 	}
 	
-	@Test
-	void testRead() {
-		assertThat(this.service.read(testerId.getId()))
-		.isEqualTo(this.mapToDTO(this.testerId));
-	}
-	
-	@Test
+    @Test
+    void testRead() {
+		assertThat(this.service.read(testTaskWithId.getId()))
+		.isEqualTo(this.mapToDTO(this.testTaskWithId));
+    }
+
+    @Test
 	void testReadAll() {
-		assertThat(Stream.of(
-				this.mapToDTO(testerId))
-				.collect(Collectors.toList()))
+		assertThat(Stream.of(this.mapToDTO(testTaskWithId))
+		.collect(Collectors.toList()))
 		.isEqualTo(this.service.read());
 	}
 	
 	@Test
 	void testUpdate() {
-		Task newTask = new Task("Clean");
-		newTask.setId(this.id);
-		TaskDTO updatedDTO = mapToDTO(newTask);
-		assertThat(updatedDTO)
-		.isEqualTo(this.service.update(newTask, this.testerId.getId()));
-		
+		TaskDTO newTask = new TaskDTO(null, "take the car to the carwash", new ArrayList<>());
+    	TaskDTO updatedTask = new TaskDTO(this.testTaskWithId.getId(), newTask.getName(), new ArrayList<>());
 
+        assertThat(this.service.update(newTask, this.testTaskWithId.getId()))
+            .isEqualTo(this.mapToDTO(testTaskWithId));
 	}
 	
 	@Test
 	void testDelete() {
-		assertThat(this.service.delete(this.tester.getId()))
+		assertThat(this.service.delete(this.testTask.getId()))
 		.isTrue();
 	}
 }

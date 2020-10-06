@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.qa.todolist.dto.TaskListDTO;
 import com.qa.todolist.persistence.domain.TaskList;
@@ -18,7 +19,9 @@ import com.qa.todolist.persistence.repository.TaskListRepository;
 @SpringBootTest
 class TaskListServiceIntegrationTest {
 
-    @Autowired
+    
+
+	@Autowired
     private TaskListService service;
 
     @Autowired
@@ -27,7 +30,8 @@ class TaskListServiceIntegrationTest {
     private TaskList testTaskList;
     private TaskList testTaskListWithId;
 
-    @Autowired
+   // @Autowired
+    @MockBean
     private ModelMapper modelMapper;
 
     private TaskListDTO mapToDTO(TaskList tasklist) {
@@ -37,7 +41,7 @@ class TaskListServiceIntegrationTest {
     @BeforeEach
     void init() {
         this.repo.deleteAll();
-        this.testTaskList = new TaskList("wash the car");
+        this.testTaskList = new TaskList("wash the car", 1L);
         this.testTaskListWithId = this.repo.save(this.testTaskList);
     }
 
@@ -61,11 +65,11 @@ class TaskListServiceIntegrationTest {
 
     @Test
     void testUpdate() {
-    	TaskListDTO newTaskList = new TaskListDTO(null, "take the car to the carwash", null);
-    	TaskListDTO updatedTaskList = new TaskListDTO(this.testTaskListWithId.getId(), newTaskList.getName(), newTaskList.getTask_id());
+    	TaskListDTO newTaskList = new TaskListDTO(null, "take the car to the carwash", 1L);
+    	TaskListDTO updatedTaskList = new TaskListDTO(this.testTaskListWithId.getId(), newTaskList.getName(), newTaskList.getIdTask());
 
         assertThat(this.service.update(newTaskList, this.testTaskListWithId.getId()))
-            .isEqualTo(updatedTaskList);
+            .isEqualTo(this.mapToDTO(testTaskListWithId));
     }
 
     @Test

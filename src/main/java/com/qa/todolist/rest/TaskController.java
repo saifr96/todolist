@@ -15,10 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.qa.todolist.dto.TaskDTO;
+import com.qa.todolist.dto.TaskListDTO;
 import com.qa.todolist.persistence.domain.Task;
 import com.qa.todolist.service.TaskService;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/task")
@@ -32,10 +33,6 @@ public class TaskController {
         this.service = service;
     }
 
-//    @PostMapping("/create")
-//    public ResponseEntity<BandDTO> create(@RequestBody BandDTO bandDTO) {
-//        return new ResponseEntity<>(this.service.create(bandDTO), HttpStatus.CREATED);
-//    }
 
     @PostMapping("/create")
     public ResponseEntity<TaskDTO> create(@RequestBody Task task) {
@@ -44,7 +41,6 @@ public class TaskController {
     }
 
     @GetMapping("/read")
-	
     public ResponseEntity<List<TaskDTO>> read() {
         return ResponseEntity.ok(this.service.read());
     }
@@ -55,12 +51,11 @@ public class TaskController {
     }
 
     @PutMapping("/update/{id}")
-	public ResponseEntity<TaskDTO> update(@PathVariable Long id, @RequestBody Task task) {
-		TaskDTO updated = this.service.update(task, id);
-		return new ResponseEntity<>(updated, HttpStatus.ACCEPTED);
+    public ResponseEntity<TaskDTO> update(@PathVariable Long id, @RequestBody TaskDTO taskDTO) {
+        return new ResponseEntity<>(this.service.update(taskDTO, id), HttpStatus.ACCEPTED);
     }
-    @CrossOrigin
-    @DeleteMapping ("/delete/{id}")
+
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<TaskDTO> delete(@PathVariable Long id) {
         return this.service.delete(id) ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
                 : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

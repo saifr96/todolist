@@ -20,30 +20,28 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @Setter
-//@ToString
+@ToString
 @EqualsAndHashCode
 public class TaskList {
 
-    @Id // Primary Key
+    @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotNull
-    @Size(min = 0, max = 55)
+   
     private String name;
 
-  //  @Min(4)
-  //  @Max(12)
-  //  private Integer strings;
-
+    private Long idTask;
+  
     @ManyToOne
     private Task task;
 
-    public TaskList(String name) {
+    public TaskList(String name, Long idTask) {
         super();
         this.name = name;
-   //     this.strings = strings;
-   //     this.type = type;
+        this.idTask = idTask;
+     
+        
+     
     }
 
 }

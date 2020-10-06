@@ -9,11 +9,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 public class todolistApplication {
 
     public static void main(String[] args) {
-    	SpringApplication.run(todolistApplication.class, args);
+        SpringApplication.run(todolistApplication.class, args);
     }
 
-	
-		
-	}
+}
 
 
