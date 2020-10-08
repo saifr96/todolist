@@ -8,9 +8,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 
-import lombok.NoArgsConstructor;
-
-@NoArgsConstructor
+//@NoArgsConstructor
 public class todolistBeanUtils {
 
     public static void mergeNotNull(Object source, Object target) {

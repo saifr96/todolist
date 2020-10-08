@@ -40,9 +40,9 @@ public class TaskListController {
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
 
-    @GetMapping("/read")
-    public ResponseEntity<List<TaskListDTO>> read() {
-        return ResponseEntity.ok(this.service.readAll());
+    @GetMapping("/readAll")
+    public ResponseEntity<List<TaskListDTO>> readAll() {
+       return ResponseEntity.ok(this.service.readAll());
     }
 
     @GetMapping("/read/{id}")

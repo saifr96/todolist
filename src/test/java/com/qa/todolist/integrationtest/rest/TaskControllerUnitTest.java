@@ -1,4 +1,4 @@
-package com.qa.todolist.rest;
+package com.qa.todolist.integrationtest.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.times;
@@ -21,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import com.qa.todolist.dto.TaskDTO;
 import com.qa.todolist.dto.TaskListDTO;
 import com.qa.todolist.persistence.domain.Task;
+import com.qa.todolist.rest.TaskController;
 import com.qa.todolist.service.TaskService;
 
 @SpringBootTest

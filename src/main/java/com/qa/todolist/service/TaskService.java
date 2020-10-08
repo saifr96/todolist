@@ -9,11 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.qa.todolist.dto.TaskDTO;
-import com.qa.todolist.dto.TaskListDTO;
 import com.qa.todolist.exception.TaskNotFoundException;
-import com.qa.todolist.exception.TaskListNotFoundException;
 import com.qa.todolist.persistence.domain.Task;
-import com.qa.todolist.persistence.domain.TaskList;
 import com.qa.todolist.persistence.repository.TaskRepository;
 import com.qa.todolist.utils.todolistBeanUtils;
 

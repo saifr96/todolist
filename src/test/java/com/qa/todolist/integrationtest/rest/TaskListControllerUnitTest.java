@@ -1,4 +1,4 @@
-package com.qa.todolist.rest;
+package com.qa.todolist.integrationtest.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.times;
@@ -20,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.qa.todolist.dto.TaskListDTO;
 import com.qa.todolist.persistence.domain.TaskList;
+import com.qa.todolist.rest.TaskListController;
 import com.qa.todolist.service.TaskListService;
 
 @SpringBootTest
@@ -80,7 +81,7 @@ class TaskListControllerUnitTest {
     void readAllTest() {
         when(this.service.readAll())
                 .thenReturn(this.tasklistList.stream().map(this::mapToDTO).collect(Collectors.toList()));
-        assertThat(this.controller.read().getBody().isEmpty()).isFalse();
+        assertThat(this.controller.readAll().getBody().isEmpty()).isFalse();
         verify(this.service, times(1)).readAll();
     }
 

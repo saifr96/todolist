@@ -1,4 +1,4 @@
-package com.qa.todolist.service;
+package com.qa.todolist.unittest.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,6 +15,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import com.qa.todolist.dto.TaskListDTO;
 import com.qa.todolist.persistence.domain.TaskList;
 import com.qa.todolist.persistence.repository.TaskListRepository;
+import com.qa.todolist.service.TaskListService;
 
 @SpringBootTest
 class TaskListServiceIntegrationTest {

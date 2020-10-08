@@ -1,4 +1,4 @@
-package com.qa.todolist.rest;
+package com.qa.todolist.integrationtest.rest;
 
 import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
@@ -85,7 +85,7 @@ public class TaskListControllerIntegrationTest {
     	List<TaskListDTO> tasklistList = new ArrayList<>();
     	        tasklistList.add(this.tasklistDTO);
     	        String expected = this.objectMapper.writeValueAsString(tasklistList);
-    	        String actual = this.mock.perform(request(HttpMethod.GET, "/tasklist/read").accept(MediaType.APPLICATION_JSON))
+    	        String actual = this.mock.perform(request(HttpMethod.GET, "/tasklist/readAll").accept(MediaType.APPLICATION_JSON))
     	                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
     	        assertEquals(expected, actual);
     }

@@ -1,4 +1,4 @@
-package com.qa.todolist.rest;
+package com.qa.todolist.integrationtest.rest;
 
 import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
