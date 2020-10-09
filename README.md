@@ -1,31 +1,52 @@
-# Springust
+To Do List
+To Do List is a web application using Java program as the backend connected to the front-end technologies HTML, CSS and Javascript. This project is done as part of the QA Academy.
 
-Starter Spring App developed with SDET August Intake on Tue 29-Sep-2020.
+Getting Started
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-Built with the following starters:
+Prerequisites
+What things you need to install the software and how to install them
 
-- Spring Web
-- H2 Database
-- Spring Data JPA
-- Lombok
+Java 7 or later
 
-Requires the following Maven dependencies:
+Eclipse or Intellij (or any other suitable IDE)
+Maven
+SpringBoot
+Visual Studio Code
 
-- [ModelMapper](https://mvnrepository.com/artifact/org.modelmapper/modelmapper/2.3.8)
-- [Swagger-UI v3.0](https://mvnrepository.com/artifact/io.springfox/springfox-boot-starter/3.0.0)
 
-Requirements (if using Eclipse):
+Installing
+To setup a development environment, you will need to clone either the master-branch or the dev-branch of this repository.
 
-- [Spring Tool Suite](https://marketplace.eclipse.org/content/spring-tools-4-aka-spring-tool-suite-4)
-- [Lombok](https://projectlombok.org/setup/eclipse)
+Once the directory is cloned, open it in the IDE of your choice.
 
-## API
+Run the 'ToDoList-Master' and the spring application should start and connect to the H2, displaying task and task list tables.
 
-- Runs out-of-the-box on `localhost:8909` (can be changed within the `application-dev.properties` file)
-- H2 console is accessible at the path `/h2` with JDBC URL `jdbc:h2:mem:todolist` and default username/password
-- Swagger UI showing API endpoints is accessible at the path `/swagger-ui/index.html`
+To access the front-end open up the Springust-master\src\main\resources\static\html in your file explorer and open the 'index.html' file.
 
-## Authors
+Running the tests
+All tests are located under the src/test/java, inside the com.qa.todolist package. inside you should see a further 3 packages 'rest', 'selenuium' and 'unittest'. 
 
-- **Saif Raja** - [saifr96](https://github.com/saifr96) - original author
+Unit Tests
+These tests cover some basics, such as testing individual units of source code..
 
+There are also Mockito tests which mocks the objects and allows us to verify the behaviour of the system under test without establishing connections.
+
+If you are using an IDE such as Intellij or Eclipse, you will be able to run these tests by right-clicking the classes and selecting the "Run as J-Unit test" option
+or  you can right-click the project folder and select the 'Coverage As...' option.
+
+
+Built With
+Maven - Dependency Management
+
+
+Authors
+Saif Raja - todolist
+
+License
+This project is licensed under the MIT license - see the LICENSE.md file for details
+
+For help in Choosing a license
+
+Acknowledgments
+Thanks to my trainers and cohort for all their guidance and help
