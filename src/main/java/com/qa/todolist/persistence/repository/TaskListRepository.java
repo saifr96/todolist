@@ -8,5 +8,7 @@ import com.qa.todolist.persistence.domain.TaskList;
 @Repository
 public interface TaskListRepository extends JpaRepository<TaskList, Long> {
 
+                                                                          
+
 
 }

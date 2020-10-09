@@ -44,9 +44,10 @@ public class TaskListService {
     }
 
     public TaskListDTO read(Long id) {
-        TaskList found = this.repo.findById(id).orElseThrow(TaskListNotFoundException::new);
-        return this.mapToDTO(found);
+    TaskList found = this.repo.findById(id).orElseThrow(TaskListNotFoundException::new);
+    return this.mapToDTO(found);
     }
+    
 
 
     public TaskListDTO update(TaskListDTO tasklistDTO, Long id) {

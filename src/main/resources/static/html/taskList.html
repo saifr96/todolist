@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/ToDoList.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <title>Task List</title>
+</head>
+
+<body>
+  <noscript>
+    <div class="alert alert-danger" role="alert">
+      <h1>Your browser does not support JavaScript, Please install or upgrade</h1>
+    </div>
+  </noscript>
+
+  <div class="container">
+
+    <div id="myDIV" class="header">
+      <h2>My Task List</h2>
+      </br>
+      <div style="display: -webkit-inline-box;">
+        <input type="text" class="form-control" id="myInputTL" placeholder=" Enter Task...">
+        <button type="button" class="btn btn-primary" id="createbuttonTL" style="margin-left: 5px;" onclick="createRow()">Create</button>
+        <button type="button" class="btn btn-primary" id="readallbuttonTL" style="margin-left: 2px;" onclick="readAll()">Read All</button>
+        <button type="button" class="btn btn-primary" id="backbuttonTL" style="margin-left: 2px;" onclick="Back()">Back</button>
+      </div>
+
+    </div>
+    </br>
+
+    <table class="table table-striped" id="myTable">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>TaskList</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="tablebody">
+
+      </tbody>
+    </table>
+    </br>
+
+  </div>
+
+
+  <script src="../javascript/taskList.js"></script>
+
+</body>
+
+</html>

@@ -2,8 +2,6 @@ package com.qa.todolist.selenium;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertThat;
-
 import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
@@ -104,7 +102,7 @@ public class TaskPageTest {
 		driver.findElement(By.id("readallbuttonTL")).click();
 		
 		//Update task list
-		 driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.findElement(By.id("updatebuttonTL")).click();
 		driver.switchTo().alert().sendKeys("Go to the store and buy fruits");
 		driver.switchTo().alert().accept();
