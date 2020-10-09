@@ -1,5 +1,5 @@
-# Project Title
-To Do List
+# Project Title-To Do List
+
 To Do List is a web application using Java program as the backend connected to the front-end technologies HTML, CSS and Javascript. This project is done as part of the QA Academy.
 
 ## Getting Started
