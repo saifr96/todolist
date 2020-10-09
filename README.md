@@ -1,10 +1,12 @@
+# Project Title
 To Do List
 To Do List is a web application using Java program as the backend connected to the front-end technologies HTML, CSS and Javascript. This project is done as part of the QA Academy.
 
+## Getting Started
 Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-Prerequisites
+### Prerequisites
 What things you need to install the software and how to install them
 
 Java 7 or later
@@ -15,7 +17,7 @@ SpringBoot
 Visual Studio Code
 
 
-Installing
+### Installing
 To setup a development environment, you will need to clone either the master-branch or the dev-branch of this repository.
 
 Once the directory is cloned, open it in the IDE of your choice.
@@ -24,7 +26,7 @@ Run the 'ToDoList-Master' and the spring application should start and connect to
 
 To access the front-end open up the Springust-master\src\main\resources\static\html in your file explorer and open the 'index.html' file.
 
-Running the tests
+## Running the tests
 All tests are located under the src/test/java, inside the com.qa.todolist package. inside you should see a further 3 packages 'rest', 'selenuium' and 'unittest'. 
 
 Unit Tests
@@ -36,17 +38,17 @@ If you are using an IDE such as Intellij or Eclipse, you will be able to run the
 or  you can right-click the project folder and select the 'Coverage As...' option.
 
 
-Built With
+## Built With
 Maven - Dependency Management
 
 
-Authors
+## Authors
 Saif Raja - todolist
 
-License
+## License
 This project is licensed under the MIT license - see the LICENSE.md file for details
 
 For help in Choosing a license
 
-Acknowledgments
+## Acknowledgments
 Thanks to my trainers and cohort for all their guidance and help
